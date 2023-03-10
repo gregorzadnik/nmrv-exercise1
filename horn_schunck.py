@@ -1,10 +1,14 @@
 import numpy as np
 from ex1_utils import *
 from scipy import signal
+from lucas_kanade import lucaskanade
 
-def hornschunck(im1, im2, n_iters, lmbd):
+def hornschunck(im1, im2, n_iters, lmbd, use_lk=False):
     u = np.zeros(im1.shape)
     v = np.zeros(im1.shape)
+
+    if(use_lk):
+        u, v = lucaskanade(im1, im2, 3)
 
     im1 = gausssmooth(im1, 1)/255
     im2 = gausssmooth(im2, 1)/255
